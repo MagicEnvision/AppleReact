@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react'
 import {heroVideo,  smallHeroVideo} from '../utils/utils.js'
@@ -6,26 +6,56 @@ import {heroVideo,  smallHeroVideo} from '../utils/utils.js'
 
 const Hero = () => {
   const [videoSrc, setVideoSrc] = useState(window.innerWidth < 760 ? smallHeroVideo : heroVideo)
+  
+  const handleVideoSrcSet = () => {
+    if(window.innerWidth < 760) {
+      setVideoSrc(smallHeroVideo)
+    } else {
+      setVideoSrc(heroVideo)
+    }
+  }
+
+  useEffect(()=>{
+    window.addEventListener('resize', handleVideoSrcSet);
+    return  () => {
+      window.removeEventListener('resize', handleVideoSrcSet)
+    }
+
+  }, [])
+
   useGSAP(() => (
-    gsap.to('.hero-title', {
+    gsap.to('#hero', {
       opacity: 1,
       delay: 1.5
+    }),
+    gsap.to('#cta', {
+      opacity:1,
+      delay:1.5,
+      y: -50 
     })
 
   ), [])
 
   return (
-    <section className='w-full nav-height bg-black relative'>
+    <section className='w-full nav-height mt-10 bg-black relative'>
       <div className='h-5/6 w-full flexCenter flex-col'>
-      <p className='hero-title text-zinc-300'>iPhone 16 Pro</p>
+      <p id='hero'className='hero-title text-zinc-300 '>iPhone 16 Pro</p>
       <div className='md:w-10/12 w-9/12'>
-        <video autoPlay muted playsInline={true} key={videoSrc} type="video/mp4">
-        <source src={videoSrc}/>
+        <video className='pointer-events-none' autoPlay muted playsInline={true} key={videoSrc} type="video/mp4">
+        <source src={videoSrc }/>
         </video>
       </div>
       </div>
+
+      <div
+        id="cta"
+        className='flex flex-col items-center
+         opacity-0 translate-y-20'>
+          <a href='#highlights' className='btn  sm:py-1 -sm:mt-1 mt-5 mb-3 px-4 bg-blue-400 rounded-full'>Buy</a>
+          <p className='font-normal text-xl'> From $199/month or $999</p>
+         </div>
     </section>
     )
 }
 
-export default Hero
+export default Hero 
