@@ -9,8 +9,6 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -28,19 +26,26 @@ canvas {
   touch-action: none;
 }
 
-.scrim-max-width {
+.screen-max-width {
   margin-inline-start: auto;
   margin-inline-end: auto;
   position: relative;
   max-width: 1120px;
 }
 
+
 @utility flexCenter {
   @apply flex items-center justify-center ;
 }
 
 @layer utilities {
-
+  
+  .screen-max-width {
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    position: relative;
+    max-width: 1120px;
+  }
 
   .control-btn {
     @apply ml-4 p-4 rounded-full bg-gray-300 backdrop-blur flexCenter;
