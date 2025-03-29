@@ -1,7 +1,6 @@
 import React from 'react';
 import {appleImg, bagImg, searchImg} from '../utils/utils.js';
 import {navLists} from '../constants/constants.js';
-import '../App.css'
 const NavBar = () => {
   return (
     <header className='w-full py-5 sm:px-10 px-5 flex justify-between items-center'>
@@ -10,7 +9,7 @@ const NavBar = () => {
         <div className='flex flex-1 justify-center max-sm:hidden'>
           {navLists.map((nav, i) => (
 
-            <div key={i} className='px-5 text-sm cursor-pointer text-zinc-300 hover:text-white transition-all'>
+            <div key={i} className='px-5 text-sm cursor-pointer hover:text-white transition-all'>
               {nav}
             </div>
 
