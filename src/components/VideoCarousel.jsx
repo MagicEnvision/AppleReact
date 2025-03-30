@@ -1,9 +1,92 @@
-import React from 'react'
-
+import React from "react";
+import { useRef, useState, useEffect } from "react";
+import { hightlightsSlides } from "../constants/constants";
+import gsap from "gsap";
 const VideoCarousel = () => {
-  return (
-    <div>VideoCarousel</div>
-  )
-}
 
-export default VideoCarousel
+const videoRef = useRef([])
+const videoSpanRef = useRef([])
+const videoDiveRef = useRef([])
+
+const [video, setVideo] = useState({
+    isEnd: false,
+    startPlay: false,
+    videoId: 0,
+    isLastVideo: false,
+    isPlaying: false
+})
+
+const [isEnd, isLastVideo, startPlay, videoId, isPlaying] = video;
+
+const [loadedData, setLoadedData] = useState([])
+
+useEffect(() => {
+    if(loadedData.length > 3) {
+        if(!isPlaying){
+            videoRef.current[videoId].pause()
+        }
+        else{
+            startPlay && videoRef.current[videoId.play()]
+        }
+    }
+
+}, [startPlay, videoId, isPlaying, loadedData])
+
+useEffect(() => {
+    const currentProgress = 0;
+    let span = videoSpanRef.current;
+    if(span[videoId]){
+        let anim = gsap.to(span[videoId], {
+            onUpdate: () => {
+
+            },
+            onComplete: () => {
+
+            }
+        })
+    }
+}, [videoId, startPlay])
+
+
+  return (
+    <>
+      <div className="flex items-center">
+        {hightlightsSlides.map((list, i) => (
+          <div key={list.id} id="slider" 
+          className="sm:pr-20 pr-10">
+            <div className="video-carousel_container">
+                <div className="w-full h-full flexCenter rounded-3xl overflow-hidden bg-black">
+                    <video id="video"
+                           playsInline={true}
+                           preload="auto"
+                           muted
+                           ref={(el) => (videoRef.current[i] = el)}
+                           onPlay={() => {
+                            setVideo((prevVideo) =>  ({
+                                ...prevVideo, isPlaying: true
+                            }))
+                           }}
+                        >
+                        <source 
+                            src={list.video} 
+                            type
+                            ="video/mp4"/>
+                    </video>
+                </div>
+                <div className="absolute top-12 left-[5%]
+                z-20">
+                    {list.textLists.map((text) => (
+                        <p key={text} className="md:text-2xl text-xl font-medium">
+                            {text}
+                        </p>
+                    ))}
+                </div>
+            </div> 
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default VideoCarousel;
