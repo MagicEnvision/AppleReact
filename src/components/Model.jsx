@@ -9,6 +9,7 @@ import {View} from '@react-three/drei'
 import {models, sizes} from '../constants/constants'
 
 const Model = () => {
+    
     const [size, setSize] = useState("small");
     const [model, setModel] = useState({
         title: 'iPhone 16 Pro in Natural Titanium',
