@@ -49,9 +49,10 @@ const Model = () => {
             </h1>
 
             <div className='flex flex-col items-center mt-5'>
-                <div className='w-full h-[75vh] md:h-[90vh] overflow-hidden relative'>
+                <div className='w-full h-[75vh] flex-row md:h-[90vh] overflow-hidden relative'>
 
-                    <ModelView 
+                  
+                      <ModelView 
                     index={1}
                     groupRef={small}
                     gsapType="view1"
@@ -59,7 +60,8 @@ const Model = () => {
                     setRotationState={setSmallRotation}
                     item={model}
                     size={size}
-                    />
+                
+                    /> 
 
                     <ModelView 
                     index={2}

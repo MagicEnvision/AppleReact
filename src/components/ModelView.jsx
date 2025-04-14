@@ -21,7 +21,7 @@ const ModelView = ({index, groupRef, gsapType,
       ref={controlRef}
       enableZoom={false}
       enablePan={false}
-      rotateSpeed={0.4}
+      rotateSpeed={0.4}      
       target = {new THREE.Vector3(0,0,0)}
       onEnd={() => setRotationState(controlRef.current.getAzimuthalAngle())}
       />
@@ -30,7 +30,7 @@ const ModelView = ({index, groupRef, gsapType,
 
       <Suspense fallback={<div>Loading</div>}>
       <IPhone
-      scale={index === 1 ? [15,15,15] : [17,17,17]}
+      scale={index === 1 ? [20,20,20] : [0]}
       item={item}
       size={size}/>
 
